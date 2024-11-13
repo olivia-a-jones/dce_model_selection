@@ -1,6 +1,6 @@
 # dce_model_selection
 
-![dce models](images/Figure1.tif)
+![dce models](images/Figure1.png)
 
 Scripts used to perform tracer kinetic model selection on simulated and in-vivo DCE-MRI data.
 All quantities, processes and model definitions are [OSIPI CAPLEX compliant](https://doi.org/10.1002/mrm.29840).<sup>1</sup> CAPLEX definitions can be accessed by clicking on quantity, process or model hyperlinks.
