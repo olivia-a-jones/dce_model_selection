@@ -34,7 +34,7 @@ This script is designed to process our scans (details of the data acquisition pa
 
 ---
 ### 4. Fitting the models to in-vivo DCE-MRI data.
-This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). **This script is run on the command line (although you could use the Python/MATLAB Madym wrappers if desired) and relies on your data being in required folder organisation structure described in the pre-processing step** and does the following:
+This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). **This script is run on the command line (although you could use the Python/MATLAB Madym wrappers if desired) and relies on the data being in required folder organisation structure described in the pre-processing step** and does the following:
 - Fits an [Extended Tofts model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ETM) of indicator exchange, a [Patlak model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#Patlak) of indicator uptake, and an intravascular model (one compartment, no indicator exchange) to all voxels of a single participants dataset, with participant folder name PARTICIPANT_ID_LABEL.
 
 ---
