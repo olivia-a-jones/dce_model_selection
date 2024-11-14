@@ -9,12 +9,12 @@ All quantities, processes and model definitions are [OSIPI CAPLEX compliant](htt
 
 ---
 ### 1. Required software
-Madym<sup>2</sup> and Madym's Python wrappers are required to run these scripts and can be downloaded [here](https://gitlab.com/manchester_qbi/manchester_qbi_public/madym_cxx).
+Madym<sup>2</sup> and Madym's Python/MATLAB wrappers are required to run these scripts and can be downloaded [here](https://gitlab.com/manchester_qbi/manchester_qbi_public/madym_cxx).
 
 --- 
 ### 2. Simulating DCE-MRI signal-time curves using an existing VIF and performing model selection. 
 ###### Please edit the VIF file, [repetition time](https://osipi.github.io/OSIPI_CAPLEX/quantities/#TR) (TR), and [flip angle](https://osipi.github.io/OSIPI_CAPLEX/quantities/#Flip%20angle) (FA) to produce simulations mirroring your DCE-MRI acquisition. A population VIF (e.g. the [Parker AIF](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ParkerAIF)) could also be used.
-This script does the following:
+This script is written in **Python** and does the following:
 - Simulates signal time-series with user-defined scan acquisition parameters, user-defined tissue parameters, the [2CXM](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#2CXM), and our smoothed group-averaged VIF ([the indicator concentration time-series for blood plasma](https://osipi.github.io/OSIPI_CAPLEX/quantities/#C)) from control participants. The ground-truth [PS](https://osipi.github.io/OSIPI_CAPLEX/quantities/#PS) and the amount of noise added to the curve are varied to produce a grid of noisy time series. 
   - The group-averaged VIF is provided in group_averaged_VIF.txt
   - Details of the participants and DCE-MRI acquisition parameters relating to the VIF can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)).
@@ -26,7 +26,7 @@ This script does the following:
 ---
 ### 3. Pre-processing of in-vivo DCE-MRI data
 This script requires SPM12 (MATLAB) which can be downloaded [here](https://www.fil.ion.ucl.ac.uk/spm/docs/). 
-This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script can be run in MATLAB and does the following:
+This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script is written in **MATLAB** (required as we use SPM) and does the following:
 - Averages the 2nd to 8th dynamic in the variable [prescribed flip angle](https://osipi.github.io/OSIPI_CAPLEX/quantities/#Flip%20angle) images.
 - Creates a B1 map from the variable [repetition time](https://osipi.github.io/OSIPI_CAPLEX/quantities/#TR) images.
 - B1-corrects the variable [prescribed flip angle](https://osipi.github.io/OSIPI_CAPLEX/quantities/#Flip%20angle) images and fits for [T1](https://osipi.github.io/OSIPI_CAPLEX/perfusionProcesses/#EstimateR10) to produce a [pre-contrast (native) T1 map](https://osipi.github.io/OSIPI_CAPLEX/perfusionProcesses/#EstimateR10).
@@ -34,12 +34,12 @@ This script is designed to process our scans (details of the data acquisition pa
 
 ---
 ### 4. Fitting the models to in-vivo DCE-MRI data.
-This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This code is run on the command line and does the following:
-- Fits an [Extended Tofts model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ETM) of indicator exchange, a [Patlak model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#Patlak) of indicator uptake, and an intravascular model (one compartment, no indicator exchange) to all voxels of a single participants dataset, with participant folder name PARTICIPANT_ID_LABEL. 
+This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). **This script is run on the command line (although you could use the Python/MATLAB Madym wrappers if desired) and relies on your data being in required folder organisation structure described in the pre-processing step** and does the following:
+- Fits an [Extended Tofts model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ETM) of indicator exchange, a [Patlak model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#Patlak) of indicator uptake, and an intravascular model (one compartment, no indicator exchange) to all voxels of a single participants dataset, with participant folder name PARTICIPANT_ID_LABEL.
 
 ---
 ### 5. Performing model selection on in-vivo DCE-MRI data. 
-This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script can be run in Python and does the following:
+This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script is written in **Python** and does the following:
 - Loads residual maps and K<sup>trans</sup> maps for each model.
 - Calculates the [Akaike Information Criterion](https://osipi.github.io/OSIPI_CAPLEX/quantities/#AIC) and corresponding Akaike Weights.
 - Selects the best-fitting model for each voxel.
