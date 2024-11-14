@@ -39,7 +39,7 @@ This script was used to call Madym to fit the tracer kinetic models to our data 
 
 ---
 ### 5. Fitting the models to in-vivo DCE-MRI data in MATLAB. 
-This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script is written in **MATLAB** and does the following:
+This script is an example of how to process our scans in MATLAB (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script is written in **MATLAB** and does the following:
 - Fits an [Extended Tofts model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ETM) of indicator exchange, a [Patlak model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#Patlak) of indicator uptake, and an intravascular model (one compartment, no indicator exchange) to all voxels of a single participants dataset, with participant folder name PARTICIPANT_ID_LABEL.
 - Loops across participants in Participant_IDs.txt
 
