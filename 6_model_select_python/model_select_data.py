@@ -130,7 +130,7 @@ def process_patient_data():
     """
     Process DCE-MRI data for all patient IDs and generate best fitting model maps.
     """
-    with open('E:\DCE_Model_Selection\Patient_IDs.txt') as f:
+    with open('E:\DCE_Model_Selection\Participant_IDs.txt') as f:
         id_list = f.read().splitlines()
 
     for id in id_list:
