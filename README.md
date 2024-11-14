@@ -24,7 +24,7 @@ This script is written in **Python** and does the following:
 - Repeats 1000 times.
 
 ---
-### 3. Pre-processing of in-vivo DCE-MRI data
+### 3. Pre-processing of in-vivo DCE-MRI data in MATLAB.
 This script requires SPM12 (MATLAB) which can be downloaded [here](https://www.fil.ion.ucl.ac.uk/spm/docs/). 
 This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script is written in **MATLAB** (required as we use SPM) and does the following:
 - Averages the 2nd to 8th dynamic in the variable [prescribed flip angle](https://osipi.github.io/OSIPI_CAPLEX/quantities/#Flip%20angle) images.
@@ -33,12 +33,18 @@ This script is designed to process our scans (details of the data acquisition pa
 - Realigns the dynamic [signal time-course](https://osipi.github.io/OSIPI_CAPLEX/quantities/#S) using [SPM12](https://www.fil.ion.ucl.ac.uk/spm/docs/). 
 
 ---
-### 4. Fitting the models to in-vivo DCE-MRI data.
-This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). **This script is run on the command line (although you could use the Python/MATLAB Madym wrappers if desired) and relies on the data being in required folder organisation structure described in the pre-processing step** and does the following:
-- Fits an [Extended Tofts model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ETM) of indicator exchange, a [Patlak model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#Patlak) of indicator uptake, and an intravascular model (one compartment, no indicator exchange) to all voxels of a single participants dataset, with participant folder name PARTICIPANT_ID_LABEL.
+### 4. Fitting the models to in-vivo DCE-MRI data on HPC Cluster.
+This script was used to call Madym to fit the tracer kinetic models to our data on Manchester's **[CSF3](https://research-it.manchester.ac.uk/services/the-computational-shared-facility-csf/)** and does the following:
+- Fits an [Extended Tofts model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ETM) of indicator exchange, a [Patlak model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#Patlak) of indicator uptake, and an intravascular model (one compartment, no indicator exchange) on a voxel-wise basis for all patients in Patient_IDs.txt.
 
 ---
-### 5. Performing model selection on in-vivo DCE-MRI data. 
+### 5. Fitting the models to in-vivo DCE-MRI data in Python. 
+This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script is written in **Python** and does the following:
+- Fits an [Extended Tofts model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ETM) of indicator exchange, a [Patlak model](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#Patlak) of indicator uptake, and an intravascular model (one compartment, no indicator exchange) to all voxels of a single participants dataset, with participant folder name PARTICIPANT_ID_LABEL.
+- Loops across participants in Participant_IDs.txt
+
+---
+### 6. Perform model selection on in-vivo DCE-MRI data in Python. 
 This script is designed to process our scans (details of the data acquisition parameters can be found in [this paper](https://doi.org/10.3389/fphys.2020.593026)), and may need to be edited to be run on other DCE-MRI datasets. An example dataset can be requested by [email](olivia.jones-4@manchester.ac.uk). This script is written in **Python** and does the following:
 - Loads residual maps and K<sup>trans</sup> maps for each model.
 - Calculates the [Akaike Information Criterion](https://osipi.github.io/OSIPI_CAPLEX/quantities/#AIC) and corresponding Akaike Weights.
