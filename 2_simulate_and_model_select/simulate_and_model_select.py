@@ -4,9 +4,7 @@ Simulate and Model Select Script
 This script generates synthetic DCE-MRI data, applies noise, and fits various
 pharmacokinetic models to estimate Ktrans.
 
-The script is designed to be modular and customizable, with user-defined
-parameters for the tissue properties, acquisition parameters, and simulation
-settings.
+Make sure to check the parameters for the tissue properties and acquisition parameters. 
 
 @author: Olivia A Jones
 """
