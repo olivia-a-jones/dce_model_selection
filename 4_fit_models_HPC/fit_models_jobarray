@@ -1,0 +1,15 @@
+#!/bin/bash --login
+#$ -cwd
+#$ -t 1-26
+
+here=/mnt/iusers01/fatpou01/bmh01/p15094oj
+ID=`awk "NR==$SGE_TASK_ID" $here/DCE_Model_Selection_Jobscripts/Patient_IDs.txt`
+Hct=`awk "NR==$SGE_TASK_ID" $here/DCE_Model_Selection_Jobscripts/Hematocrit.txt`
+
+module load apps/singularity/madym/4.23.0
+
+madym "madym_DCE  -m PATLAK -o $here/scratch/DCE_Model_Selection/$ID/dce_fitting/Intravascular -d rdyn_ --dyn_dir $here/scratch/DCE_Model_Selection/$ID/dynamic_series --sequence_format %01u --sequence_start 1 --sequence_step 1 --n_dyns 160 --Ct 0 --T1 $here/scratch/DCE_Model_Selection/$ID/t1_map/T1.nii --r1 3.400000e+00 -D 1.000000e-01 --M0_ratio 1 --Ct_sig 1 --Ct_mod 1 --test_enh 0 --max_iter 1000 --opt_type BLEIC --overwrite 1 -H $Hct -i 8 --aif_map $here/scratch/DCE_Model_Selection/$ID/dynamic_series/lrdyn_160 --init_params 0,2.000000e-02,0 --fixed_params 1 --fixed_values 0 --upper_bounds 1,1,20 --lower_bounds -1.000000e-03,0,-20"
+
+madym "madym_DCE  -m PATLAK -o $here/scratch/DCE_Model_Selection/$ID/dce_fitting/Patlak -d rdyn_ --dyn_dir $here/scratch/DCE_Model_Selection/$ID/dynamic_series --sequence_format %01u --sequence_start 1 --sequence_step 1 --n_dyns 160 --Ct 0 --T1 $here/scratch/DCE_Model_Selection/$ID/t1_map/T1.nii --r1 3.400000e+00 -D 1.000000e-01 --M0_ratio 1 --no_opt 0 --Ct_sig 0 --Ct_mod 0 --test_enh 0 --max_iter 1000 --opt_type BLEIC --overwrite 1 -H $Hct  -i 8 --aif_map $here/scratch/DCE_Model_Selection/$ID/dynamic_series/lrdyn_160 --audit_dir $here/scratch/DCE_Model_Selection/$ID/madym_files/logs --init_params 1.000000e-03,2.000000e-02,0 --upper_bounds 1,1,20 --lower_bounds -1.000000e-03,0,-20"
+
+madym "madym_DCE  -m ETM -o $here/scratch/DCE_Model_Selection/$ID/dce_fitting/ETM -d rdyn_ --dyn_dir $here/scratch/DCE_Model_Selection/$ID/dynamic_series --sequence_format %01u --sequence_start 1 --sequence_step 1 --n_dyns 160 --Ct 0 --T1 $here/scratch/DCE_Model_Selection/$ID/t1_map/T1.nii --r1 3.400000e+00 -D 1.000000e-01 --M0_ratio 1 --no_opt 0 --Ct_sig 1 --Ct_mod 1 --test_enh 0 --max_iter 1000 --opt_type BLEIC --overwrite 1 -H $Hct  -i 8 --aif_map $here/scratch/DCE_Model_Selection/$ID/dynamic_series/lrdyn_160 --audit_dir $here/scratch/DCE_Model_Selection/$ID/madym_files/logs --init_params 1.000000e-03,2.000000e-02,1.000000e-01,0 --upper_bounds 1,1,1,20 --lower_bounds -1.000000e-03,0,0,-20"
