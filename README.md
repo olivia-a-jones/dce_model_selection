@@ -12,7 +12,7 @@ All quantities, processes and model definitions are [OSIPI CAPLEX compliant](htt
 Madym<sup>2</sup> and Madym's Python/MATLAB wrappers are required to run these scripts and can be downloaded [here](https://gitlab.com/manchester_qbi/manchester_qbi_public/madym_cxx).
 
 --- 
-### 2. Simulating DCE-MRI signal-time curves using an existing VIF and performing model selection. 
+### 2. (a) Simulating DCE-MRI signal-time curves with varying K<sup>trans</sup> and noise and performing model selection. 
 ###### Please edit the VIF file, [repetition time](https://osipi.github.io/OSIPI_CAPLEX/quantities/#TR) (TR), and [flip angle](https://osipi.github.io/OSIPI_CAPLEX/quantities/#Flip%20angle) (FA) to produce simulations mirroring your DCE-MRI acquisition. A population VIF (e.g. the [Parker AIF](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#ParkerAIF)) could also be used.
 This script is written in **Python** and does the following:
 - Simulates signal time-series with user-defined scan acquisition parameters, user-defined tissue parameters, the [2CXM](https://osipi.github.io/OSIPI_CAPLEX/perfusionModels/#2CXM), and our smoothed group-averaged VIF ([the indicator concentration time-series for blood plasma](https://osipi.github.io/OSIPI_CAPLEX/quantities/#C)) from control participants. The ground-truth [PS](https://osipi.github.io/OSIPI_CAPLEX/quantities/#PS) and the amount of noise added to the curve are varied to produce a grid of noisy time series. 
@@ -22,6 +22,12 @@ This script is written in **Python** and does the following:
 - Selects the best fitting model for each time-series in the grid using the [Akaike Information Criterion](https://osipi.github.io/OSIPI_CAPLEX/quantities/#AIC).
 - For the grid of time-series, the following are saved in text files: best-fitting model, the fitted K<sup>trans</sup>, fitted v<sub>p</sub>, and if applicable, v<sub>e</sub>.
 - Repeats 1000 times.
+
+### 2. (b) Simulating DCE-MRI signal-time curves with varying v<sub>p</sub>, v<sub>e</sub>, F<sub>p</sub>, and T<sub>10</sub> and performing model selection.
+- Repeats 2 (a) but varying the other ground truth input parameters.
+
+### 2. (c) Simulating DCE-MRI signal-time curves simultaneously varying all parameters and performing model selection.
+- Repeats 2 (a) and (b) but varying all ground truth input parameters simultaneously.
 
 ---
 ### 3. Pre-processing of in-vivo DCE-MRI data in MATLAB.
